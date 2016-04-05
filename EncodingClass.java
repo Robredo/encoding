@@ -1,3 +1,4 @@
+import java.io.*;
 public class EncodingClass {
   private static byte    byte_value = 101;
   private static short  short_value = 5;
@@ -16,20 +17,26 @@ public class EncodingClass {
     for(byte b : val){
       str.append(b & mask).append(" ");
     }
-    System.out.println(str.toString());
+    System.out.println(str);
   }
 
   // Falta hacer un loop para 
   public static byte[] encodeBigEndian(long val, int size){
     byte[] ret = new byte[size];
-    ret[0] = (byte) val ;
+    for(int i = 0; i < size; i++){
+      ret[i] = (byte) (val >> ((size -i - 1) * Byte.SIZE));
+    }
     return ret;
   } 
 
-  public static void main(String[] args){
-    System.out.println("byte:" + byte_size + " short:" + 
-        short_size + " int:" + int_size + " long:" + long_size);
-    byte[] byte10 = encodeBigEndian(255, byte_size);
-    printByteArray(byte10); 
+  public static void main(String[] args) throws IOException {
+//    System.out.println("byte:" + byte_size + " short:" + 
+//        short_size + " int:" + int_size + " long:" + long_size);
+//    byte[] byte10 = encodeBigEndian(256, short_size);
+//    printByteArray(byte10); 
+    ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+    DataOutputStream out = new DataOutputStream(buffer);
+    out.writeByte(1);
+    printByteArray(buffer.toByteArray());
   }
 }
