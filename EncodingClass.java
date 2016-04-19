@@ -1,9 +1,12 @@
+
+
 public class EncodingClass {
   private static byte    byte_value = 101;
   private static short  short_value = 5;
   private static int      int_value = 100000001;
   private static long    long_value = 123456787654321L;
 
+//Tamaños de los diferentes tipos de variables
   final static int byte_size = Byte.SIZE / Byte.SIZE;
   final static int int_size = Integer.SIZE / Byte.SIZE;
   final static int short_size = Short.SIZE / Byte.SIZE;
@@ -11,6 +14,7 @@ public class EncodingClass {
 
   private final static int mask = 0xFF;
 
+ // Imprime el arreglo de bits
   public static void printByteArray(byte[] val){
     StringBuilder str = new StringBuilder();
     for(byte b : val){
@@ -19,7 +23,7 @@ public class EncodingClass {
     System.out.println(str.toString());
   }
 
-  // Falta hacer un loop para 
+  // Codifica a bigEndian: recibe el valor y el tamaño
   public static byte[] encodeBigEndian(long val, int size){
     byte[] ret = new byte[size];
     ret[0] = (byte) val ;
@@ -27,8 +31,8 @@ public class EncodingClass {
   } 
 
   public static void main(String[] args){
-    System.out.println("byte:" + byte_size + " short:" + 
-        short_size + " int:" + int_size + " long:" + long_size);
+    // Imprime los valores y tamaños de las variables
+    System.out.println("byte:" + byte_size + " short:" + short_size + " int:" + int_size + " long:" + long_size);
     byte[] byte10 = encodeBigEndian(255, byte_size);
     printByteArray(byte10); 
   }
